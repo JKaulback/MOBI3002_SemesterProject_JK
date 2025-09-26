@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SemesterProject</string>
-    <string name="greeting">Greetings!</string>
-    <string name="forecast">The forecast for today is bright and sunny</string>
-    <string name="forecast_comment">It is going to be hot out there</string>
+    <string name="title">Weather Prediction</string>
+    <string name="i_predict">I predict...</string>
+    <string name="prediction">Cloudy with sunny skies</string>
+    <string name="predict">PREDICT</string>
 </resources>
