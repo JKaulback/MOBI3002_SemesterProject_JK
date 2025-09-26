@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">SemesterProject</string>
     <string name="title">Weather Prediction</string>
-    <string name="i_predict">I predict...</string>
+    <string name="i_predict">I predict…</string>
     <string name="prediction">Cloudy with sunny skies</string>
     <string name="predict">PREDICT</string>
+    <string name="preference_file_key">com.example.semesterproject.PREFERENCE_FILE_KEY</string>
 </resources>
