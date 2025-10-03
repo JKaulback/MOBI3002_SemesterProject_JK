@@ -9,4 +9,6 @@
     <dimen name="button_margin_top">75dp</dimen>
     <dimen name="layout_editor_abs_x">1dp</dimen>
     <dimen name="layout_editor_abs_y">1dp</dimen>
+    <dimen name="image_width">50dp</dimen>
+    <dimen name="image_height">50dp</dimen>
 </resources>
