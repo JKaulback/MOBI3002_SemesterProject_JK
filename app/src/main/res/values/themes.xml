@@ -13,4 +13,21 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Lab 3: Creating Custom Themes -->
+    <style name="Theme.Custom.Primary" parent="Theme.SemesterProject">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/custom_theme_primary</item>
+        <item name="colorPrimaryVariant">@color/custom_theme_primary_variant</item>
+        <item name="colorOnPrimary">@color/custom_theme_on_primary</item>
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/custom_theme_secondary</item>
+        <item name="colorSecondaryVariant">@color/custom_theme_secondary_variant</item>
+        <item name="colorOnSecondary">@color/custom_theme_on_secondary</item>
+        <!-- Text Theming-->
+        <item name="android:textColor">@color/custom_theme_on_secondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <!-- Other -->
+        <item name="android:statusBarColor">@color/custom_theme_primary_variant</item>
+    </style>
 </resources>
