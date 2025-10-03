@@ -3,12 +3,12 @@ package com.example.semesterproject
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var predictButton: Button
 
     private lateinit var predictionTextView: TextView
+    private lateinit var predictionImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         predictButton.setOnClickListener {
             randomizePrediction()
             updatePredictionText()
+            updatePredictionImage()
         }
 
         // Initialize the textView for the prediction text
@@ -49,7 +51,12 @@ class MainActivity : AppCompatActivity() {
             loadWeatherPredictionFromSharedPrefs()
         }
 
+        // Initialize the imageView for the weather prediction
+        predictionImageView = findViewById(R.id.activity_main_prediction_imageView)
+
+        // Setup the view
         updatePredictionText()
+        updatePredictionImage()
 
     }
 
@@ -68,13 +75,21 @@ class MainActivity : AppCompatActivity() {
     // Randomizes the value of the weatherPredictionText
     private fun randomizePrediction() {
         Log.d(TAG, "Randomizing prediction")
-        weatherPredictionText = WEATHER_OPTIONS[Random.nextInt(WEATHER_OPTIONS.size)]
+        weatherPredictionText = WEATHER_OPTIONS.keys.random()
     }
 
     // Updates the prediction text view with the value stored in weatherPredictionText
     private fun updatePredictionText() {
         Log.d(TAG, "Updating prediction text")
         predictionTextView.text = weatherPredictionText
+    }
+
+    private fun updatePredictionImage() {
+        Log.d(TAG, "Updating prediction image")
+        val resource = WEATHER_OPTIONS[weatherPredictionText]
+        resource?.let {
+            predictionImageView.setImageResource(resource)
+        }
     }
 
     // Loads the saved weather prediction state from when the activity was destroyed and recreated
@@ -107,8 +122,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val STATE_PREDICTION = "prediction"
         const val STATE_PREDICTION_DEFAULT = "Cloudy with sunny skies"
-        val WEATHER_OPTIONS = arrayOf<String>("Cloudy with sunny skies", "Dark and damp", "Raining cats and dogs",
-            "Hotter than the surface of the sun", "Snowy and frigid", "Crisp and refreshing spring air")
+        val WEATHER_OPTIONS = mapOf("Cloudy with sunny skies" to R.drawable.sun,
+            "Dark and damp" to R.drawable.cloud,
+            "Raining cats and dogs" to R.drawable.pet,
+            "Hotter than the surface of the sun" to R.drawable.local_fire_department,
+            "Snowy and frigid" to R.drawable.snowboarding,
+            "Crisp and refreshing spring air" to R.drawable.air)
         const val TAG = "com.example.semesterproject.MainActivity"
     }
 
