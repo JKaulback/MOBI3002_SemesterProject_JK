@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_small">15sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_large">30sp</dimen>
+    <dimen name="margin_top_medium">60dp</dimen>
+    <dimen name="margin_bottom_large">90dp</dimen>
+    <dimen name="margin_small">30dp</dimen>
+    <dimen name="button_margin_top">75dp</dimen>
+    <dimen name="layout_editor_abs_x">1dp</dimen>
+    <dimen name="layout_editor_abs_y">1dp</dimen>
+</resources>

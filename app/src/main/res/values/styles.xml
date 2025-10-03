@@ -2,9 +2,9 @@
 <resources>
     <style name="Custom_Button_Theme" parent="android:Widget.Button">
         <item name="android:backgroundTint">@color/custom_theme_primary_variant</item>
-        <item name="android:layout_marginTop">75sp</item>
+        <item name="android:layout_marginTop">@dimen/button_margin_top</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/custom_theme_secondary</item>
         <item name="android:textAllCaps">false</item>
     </style>
