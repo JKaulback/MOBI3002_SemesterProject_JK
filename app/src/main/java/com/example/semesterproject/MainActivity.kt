@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity() {
         // Initialize and configure the weather prediction button
         predictButton =findViewById(R.id.activity_main_predict_button)
         predictButton.setOnClickListener {
-            randomizePrediction()
-            updatePredictionText()
-            updatePredictionImage()
+            handlePredictButtonClick()
         }
 
         // Initialize the textView for the prediction text
@@ -90,6 +88,12 @@ class MainActivity : AppCompatActivity() {
         resource?.let {
             predictionImageView.setImageResource(resource)
         }
+    }
+
+    private fun handlePredictButtonClick() {
+        randomizePrediction()
+        updatePredictionText()
+        updatePredictionImage()
     }
 
     // Loads the saved weather prediction state from when the activity was destroyed and recreated
