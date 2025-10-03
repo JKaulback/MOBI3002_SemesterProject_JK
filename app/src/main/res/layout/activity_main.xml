@@ -52,8 +52,7 @@
             android:id="@+id/activity_main_predict_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="75sp"
+            style="@style/Custom_Button_Theme"
             android:text="@string/predict"/>
 
     </LinearLayout>
