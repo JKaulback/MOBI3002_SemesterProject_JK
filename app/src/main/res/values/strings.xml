@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SemesterProject</string>
+    <string name="name_input_label">Enter Name</string>
+    <string name="name_input_hint">Name</string>
     <string name="title">Weather Prediction</string>
     <string name="i_predict">I predict…</string>
     <string name="prediction">Cloudy with sunny skies</string>
