@@ -2,6 +2,7 @@ package com.example.semesterproject
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var predictButton: Button
 
     private lateinit var predictionTextView: TextView
-    private lateinit var predictionImageView: ImageView
+    private lateinit var predictionImageViewShown: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +50,9 @@ class MainActivity : AppCompatActivity() {
             loadWeatherPredictionFromSharedPrefs()
         }
 
-        // Initialize the imageView for the weather prediction
-        predictionImageView = findViewById(R.id.activity_main_prediction_imageView)
-
         // Setup the view
         updatePredictionText()
-        updatePredictionImage()
+        showPredictionImage()
 
     }
 
@@ -82,12 +80,27 @@ class MainActivity : AppCompatActivity() {
         predictionTextView.text = weatherPredictionText
     }
 
-    private fun updatePredictionImage() {
-        Log.d(TAG, "Updating prediction image")
+    // Show an image based on the prediction
+    private fun showPredictionImage() {
+        Log.d(TAG, "Showing prediction image")
         val resource = WEATHER_OPTIONS[weatherPredictionText]
         resource?.let {
-            predictionImageView.setImageResource(resource)
+            predictionImageViewShown = findViewById(resource)
+            predictionImageViewShown.visibility = View.VISIBLE
         }
+    }
+
+    // Hide the prediction image
+    private fun hidePredictionImage() {
+        Log.d(TAG, "Hiding prediction image")
+        predictionImageViewShown.visibility = View.INVISIBLE
+    }
+
+    // Update the prediction image
+    private fun updatePredictionImage() {
+        Log.d(TAG, "Updating prediction image")
+        hidePredictionImage()
+        showPredictionImage()
     }
 
     private fun handlePredictButtonClick() {
@@ -126,12 +139,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val STATE_PREDICTION = "prediction"
         const val STATE_PREDICTION_DEFAULT = "Cloudy with sunny skies"
-        val WEATHER_OPTIONS = mapOf("Cloudy with sunny skies" to R.drawable.sun,
-            "Dark and damp" to R.drawable.cloud,
-            "Raining cats and dogs" to R.drawable.pet,
-            "Hotter than the surface of the sun" to R.drawable.local_fire_department,
-            "Snowy and frigid" to R.drawable.snowboarding,
-            "Crisp and refreshing spring air" to R.drawable.air)
+        val WEATHER_OPTIONS = mapOf("Cloudy with sunny skies" to R.id.activity_main_sun_imageView,
+            "Dark and damp" to R.id.activity_main_cloud_imageView,
+            "Raining cats and dogs" to R.id.activity_main_pet_imageView,
+            "Hotter than the surface of the sun" to R.id.activity_main_local_fire_department_imageView,
+            "Snowy and frigid" to R.id.activity_main_snowboarding_imageView,
+            "Crisp and refreshing spring air" to R.id.activity_main_air_imageView)
         const val TAG = "com.example.semesterproject.MainActivity"
     }
 
