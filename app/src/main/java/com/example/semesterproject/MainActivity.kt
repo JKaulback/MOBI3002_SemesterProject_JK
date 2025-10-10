@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -14,9 +15,13 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     private var weatherPredictionText: String? = STATE_PREDICTION_DEFAULT
+    private var userName: String? = ""
 
+    private var predictionStringBuilder = StringBuilder()
+
+    private lateinit var userNameInputView: EditText
     private lateinit var predictButton: Button
-
+    private lateinit var iPredictTextView: TextView
     private lateinit var predictionTextView: TextView
     private lateinit var predictionImageViewShown: ImageView
 
@@ -39,6 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize the textView for the prediction text
         predictionTextView = findViewById(R.id.activity_main_prediction_textView)
+
+        // Initialize the EditText element for the user name
+        userNameInputView = findViewById(R.id.activity_main_name_input_edit_text)
+
+        // Initialize the "I predict..." element
+        iPredictTextView = findViewById(R.id.activity_main_i_predict_textView)
 
         // Checks if there are any saved instance state bundles. If there are, the let block runs
         // to load the stored weatherPredictionText.
@@ -74,6 +85,13 @@ class MainActivity : AppCompatActivity() {
         weatherPredictionText = WEATHER_OPTIONS.keys.random()
     }
 
+    // Read the name entered in the name input view
+    private fun readName() {
+        Log.d(TAG, "Reading the Enter Name EditText view")
+        userName = userNameInputView.text.toString()
+        predictionStringBuilder.append(userName)
+    }
+
     // Updates the prediction text view with the value stored in weatherPredictionText
     private fun updatePredictionText() {
         Log.d(TAG, "Updating prediction text")
@@ -103,7 +121,20 @@ class MainActivity : AppCompatActivity() {
         showPredictionImage()
     }
 
+    private fun clearPredictionStringBuilder() {
+        predictionStringBuilder.setLength(0)
+    }
+
+    private fun updateIPredictText() {
+        if (predictionStringBuilder.isNotEmpty()) predictionStringBuilder.append(", ")
+        predictionStringBuilder.append(getString(R.string.i_predict))
+        iPredictTextView.text = predictionStringBuilder.toString()
+    }
+
     private fun handlePredictButtonClick() {
+        clearPredictionStringBuilder()
+        readName()
+        updateIPredictText()
         randomizePrediction()
         updatePredictionText()
         updatePredictionImage()
