@@ -51,16 +51,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize the "I predict..." element
         iPredictTextView = findViewById(R.id.activity_main_i_predict_textView)
 
-        // Checks if there are any saved instance state bundles. If there are, the let block runs
-        // to load the stored weatherPredictionText.
-        // If the saved instance state is null, the run block... runs to attempt to load the
-        /// weatherPredictionText from SharedPrefs
-        savedInstanceState?.let {
-            loadWeatherPrediction(it)
-        } ?: run {
-            loadWeatherPredictionFromSharedPrefs()
-        }
-
         // Setup the view
         updatePredictionText()
         showPredictionImage()
@@ -70,13 +60,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "Stopping...")
-        val sharedPrefs = getSharedPreferences(
-            getString(R.string.preference_file_key),
-            MODE_PRIVATE)
-        with(sharedPrefs.edit()) {
-            putString(STATE_PREDICTION, weatherPredictionText)
-            apply()
-        }
     }
 
     // Randomizes the value of the weatherPredictionText
@@ -140,35 +123,7 @@ class MainActivity : AppCompatActivity() {
         updatePredictionImage()
     }
 
-    // Loads the saved weather prediction state from when the activity was destroyed and recreated
-    private fun loadWeatherPrediction(bundle: Bundle) {
-        Log.d(TAG, "Loading from instance state")
-        weatherPredictionText = bundle.getString(STATE_PREDICTION)
-    }
-
-    // Loads the saved prediction state from SharedPrefs when the activity is being created
-    private fun loadWeatherPredictionFromSharedPrefs() {
-        Log.d(TAG, "Loading from SP")
-        getSharedPreferences(
-            getString(R.string.preference_file_key),
-            MODE_PRIVATE
-            ).run {
-                weatherPredictionText = getString(STATE_PREDICTION, STATE_PREDICTION_DEFAULT)
-                Log.d(TAG,"got weather prediction from SP")
-            }
-    }
-
-    // This function MUST be overridden to add the state of weatherPredictionText
-    // to the instanceState bundle. This is always called when the activity
-    // is about to be destroyed due to an orientation change
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(STATE_PREDICTION, weatherPredictionText)
-        super.onSaveInstanceState(outState)
-    }
-
-
     companion object {
-        const val STATE_PREDICTION = "prediction"
         const val STATE_PREDICTION_DEFAULT = "Cloudy with sunny skies"
         val WEATHER_OPTIONS = mapOf("Cloudy with sunny skies" to R.id.activity_main_sun_imageView,
             "Dark and damp" to R.id.activity_main_cloud_imageView,
