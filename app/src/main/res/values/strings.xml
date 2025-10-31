@@ -2,13 +2,17 @@
     <string name="app_name">SemesterProject</string>
     <string name="name_input_label">Enter Name</string>
     <string name="name_input_hint">Name</string>
-    <string name="title">Weather Prediction</string>
+    <string name="main_activity_title">Weather Prediction</string>
     <string name="i_predict">I predict…</string>
     <string name="prediction">Cloudy with sunny skies</string>
-    <string name="predict">Predict</string>
+    <string name="predict_button_text">Predict</string>
     <string name="preference_file_key">com.example.semesterproject.PREFERENCE_FILE_KEY</string>
     <string name="image_content_description">Image generated based on the prediction</string>
     <string name="historical_predictions_text">Historical Predictions</string>
     <string name="main_activity_toolbar_title">Weather App</string>
     <string name="placeholder">%1$s\n%2$s</string>
+
+    <string name="prediction_activity_toolbar_title">Prediction</string>
+    <string name="prediction_activity_title">Latest Prediction</string>
+    <string name="finish_button_text">Finish</string>
 </resources>

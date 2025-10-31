@@ -9,4 +9,10 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:padding">@dimen/button_padding</item>
     </style>
+
+    <style name="Custom_Title_Theme" >
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
 </resources>
