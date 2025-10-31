@@ -10,4 +10,5 @@
     <string name="image_content_description">Image generated based on the prediction</string>
     <string name="historical_predictions_text">Historical Predictions</string>
     <string name="main_activity_toolbar_title">Weather App</string>
+    <string name="placeholder">%1$s\n%2$s</string>
 </resources>

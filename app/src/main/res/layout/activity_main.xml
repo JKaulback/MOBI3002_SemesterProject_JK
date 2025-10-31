@@ -99,16 +99,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_main_history_label_textView" />
 
-            <LinearLayout
-                android:id="@+id/activity_main_historical_prediction_container_linearLayout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/activity_main_predictions_textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAlignment="textStart"
+                android:lineSpacingMultiplier="1.5"
+                android:layout_margin="@dimen/margin_small"
+                tools:text="#1. Cloudy with sunny skies\n#2. Raining cats and dogs\n#3. Cloudy with sunny skies\n#4. etc"
+                app:layout_constraintTop_toBottomOf="@id/activity_main_history_divider_materialDivider"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_main_history_divider_materialDivider">
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
