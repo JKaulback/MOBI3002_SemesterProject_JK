@@ -1,163 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:layout_editor_absoluteX="@dimen/layout_editor_abs_x"
-    tools:layout_editor_absoluteY="@dimen/Layout_editor_abs_y">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_main_weather_forecast_linearLayout"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/toolbar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/white"
+        app:title="@string/main_activity_toolbar_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:textAlignment="center"
-        android:fontFamily="serif">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar">
 
-        <TextView
-            android:id="@+id/activity_main_title_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/title"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/activity_main_name_input_edit_text"
-            android:text="@string/name_input_label"
-            app:layout_constraintBottom_toTopOf="@+id/activity_main_name_input_edit_text"
-            app:layout_constraintStart_toStartOf="@+id/activity_main_name_input_edit_text" />
-
-        <EditText
-            android:id="@+id/activity_main_name_input_edit_text"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:autofillHints="@string/name_input_hint"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_title_textView" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/activity_main_i_predict_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/i_predict"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_name_input_edit_text" />
+            <TextView
+                android:id="@+id/activity_main_title_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/title"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/activity_main_prediction_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/prediction"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_i_predict_textView" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/activity_main_name_input_edit_text"
+                android:text="@string/name_input_label"
+                app:layout_constraintBottom_toTopOf="@+id/activity_main_name_input_edit_text"
+                app:layout_constraintStart_toStartOf="@+id/activity_main_name_input_edit_text" />
 
-        <Button
-            android:id="@+id/activity_main_predict_button"
-            style="@style/Custom_Button_Theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_margin_top"
-            android:text="@string/predict"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_prediction_textView" />
+            <EditText
+                android:id="@+id/activity_main_name_input_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:autofillHints="@string/name_input_hint"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_main_title_textView" />
 
-        <ImageView
-            android:id="@+id/activity_main_air_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_large"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/air"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_predict_button" />
 
-        <ImageView
-            android:id="@+id/activity_main_cloud_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/cloud"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.569"
-            app:layout_constraintStart_toEndOf="@+id/activity_main_air_imageView"
-            app:layout_constraintTop_toTopOf="@+id/activity_main_air_imageView" />
+            <Button
+                android:id="@+id/activity_main_predict_button"
+                style="@style/Custom_Button_Theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_top"
+                android:text="@string/predict"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_main_name_input_edit_text" />
 
-        <ImageView
-            android:id="@+id/activity_main_local_fire_department_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/local_fire_department"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/activity_main_air_imageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/activity_main_air_imageView" />
+            <TextView
+                android:id="@+id/activity_main_history_label_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/historical_predictions_text"
+                android:textSize="@dimen/text_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_main_predict_button" />
 
-        <ImageView
-            android:id="@+id/activity_main_pet_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/pet"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_air_imageView" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/activity_main_history_divider_materialDivider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_main_history_label_textView" />
 
-        <ImageView
-            android:id="@+id/activity_main_snowboarding_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/snowboarding"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/activity_main_pet_imageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/activity_main_pet_imageView" />
+            <LinearLayout
+                android:id="@+id/activity_main_historical_prediction_container_linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_main_history_divider_materialDivider">
 
-        <ImageView
-            android:id="@+id/activity_main_sun_imageView"
-            android:layout_width="@dimen/image_width"
-            android:layout_height="@dimen/image_height"
-            android:contentDescription="@string/image_content_description"
-            android:src="@drawable/sun"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/activity_main_pet_imageView"
-            app:layout_constraintTop_toTopOf="@+id/activity_main_pet_imageView" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
