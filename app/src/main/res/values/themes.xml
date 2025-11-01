@@ -30,4 +30,9 @@
         <!-- Other -->
         <item name="android:statusBarColor">@color/custom_theme_primary_variant</item>
     </style>
+
+    <style name="Theme.Custom.Primary.NoActionBar" parent="Theme.Custom.Primary">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true </item>
+    </style>
 </resources>

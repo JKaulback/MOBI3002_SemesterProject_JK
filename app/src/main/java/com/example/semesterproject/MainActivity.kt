@@ -35,19 +35,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        try {
+            setContentView(R.layout.activity_main)
 
-        // Declare the custom Toolbar
-        setSupportActionBar(findViewById(R.id.activity_main_toolbar))
+            // Declare the custom Toolbar
+            setSupportActionBar(findViewById(R.id.activity_main_toolbar))
 
-        userNameInputView = findViewById(R.id.activity_main_name_input_edit_text)
-        predictButton = findViewById(R.id.activity_main_predict_button)
-        predictionHistoryTextView = findViewById(R.id.activity_main_predictions_textView)
+            userNameInputView = findViewById(R.id.activity_main_name_input_edit_text)
+            predictButton = findViewById(R.id.activity_main_predict_button)
+            predictionHistoryTextView = findViewById(R.id.activity_main_predictions_textView)
 
-        predictButton.setOnClickListener {
-            handlePredictButtonClick()
+            predictButton.setOnClickListener {
+                handlePredictButtonClick()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Crash in onCreate", e)
+            throw e
         }
     }
+
 
     override fun onStop() {
         super.onStop()
