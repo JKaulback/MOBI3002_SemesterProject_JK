@@ -57,15 +57,98 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
-                android:id="@+id/prediction_activity_prediction_textView"
+                android:id="@+id/prediction_activity_location_area_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/custom_theme_secondary_variant"
+                tools:text="@string/test_area_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_i_predict_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_location_lat_lon_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/custom_theme_secondary_variant"
+                tools:text="@string/test_lat_lon_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_area_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_location_local_time_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/custom_theme_secondary_variant"
+                tools:text="@string/test_local_time_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_lat_lon_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_current_temp_time_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/custom_theme_secondary_variant"
-                android:text=""
-                tools:text="@string/prediction"
+                tools:text="@string/test_temp_time_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_local_time_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_current_temp_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_medium"
+                tools:text="@string/test_temp_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_temp_time_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_current_wind_speed_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_medium"
+                tools:text="@string/test_wind_speed_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_temp_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/prediction_activity_current_wind_dir_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_medium"
+                tools:text="@string/test_wind_dir_text"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_wind_speed_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <ProgressBar
+                android:id="@+id/prediction_activity_progressBar"
+                android:layout_width="@dimen/progress_bar_width"
+                android:layout_height="@dimen/progress_bar_height"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:indeterminate="true"
+                android:layout_margin="@dimen/margin_small"
                 app:layout_constraintTop_toBottomOf="@id/prediction_activity_i_predict_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -77,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:text="@string/finish_button_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_prediction_textView"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_wind_dir_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

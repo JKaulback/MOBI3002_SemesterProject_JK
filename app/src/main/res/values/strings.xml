@@ -10,11 +10,26 @@
     <string name="image_content_description">Image generated based on the prediction</string>
     <string name="historical_predictions_text">Historical Predictions</string>
     <string name="main_activity_toolbar_title">Weather App</string>
-    <string name="placeholder">%1$s\n%2$s</string>
 
     <string name="prediction_activity_toolbar_title">Prediction</string>
     <string name="prediction_activity_title">Latest Prediction</string>
     <string name="finish_button_text">Finish</string>
 
     <string name="weather_fetch_error">Error fetching weather data</string>
+
+    <string name="area_placeholder">%1$s, %2$s, %3$s</string>
+    <string name="lat_lon_placeholder">Latitude: %1$.2f°\nLongitude: %2$.2f°</string>
+    <string name="local_time_placeholder">Local Time: %1$s</string>
+    <string name="temp_time_placeholder">Temperature Taken at:\n%1$s</string>
+    <string name="temp_placeholder">Current Temperature:\n%1$.1f °C (%2$.1f °F)</string>
+    <string name="wind_speed_placeholder">Current Wind Speed:\n%1$.1fkm/h (%2$.1f mph)</string>
+    <string name="wind_dir_placeholder">Current Wind Speed:\n%1$s</string>
+
+    <string name="test_area_text">Halifax, Nova Scotia, Canada</string>
+    <string name="test_lat_lon_text">Latitude: 44.65°\nLongitude: -63.60°</string>
+    <string name="test_local_time_text">Local Time: 2025-11-10 16:49</string>
+    <string name="test_temp_time_text">Temperature Taken at:\n2025-11-10 16:45</string>
+    <string name="test_temp_text">Current Temperature:\n20 °C (68 °F)</string>
+    <string name="test_wind_speed_text">Current Wind Speed:\n12kph (7.5 mph)</string>
+    <string name="test_wind_dir_text">Current Wind Direction:\nSE</string>
 </resources>
