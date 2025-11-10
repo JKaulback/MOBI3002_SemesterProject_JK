@@ -1,5 +1,6 @@
 package com.example.semesterproject.api
 
+import android.util.Log
 import com.example.semesterproject.models.ForecastResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -9,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object WeatherRetrofitApi {
-    private const val BASE_URL = "http://api.weatherapi.com/v1"
+    private const val BASE_URL = "https://api.weatherapi.com/v1/"
     private const val TIMEOUT_DURATION = 30000L
 
     // Adds api key to weather api requests
@@ -21,6 +22,8 @@ object WeatherRetrofitApi {
         val request = chain.request().newBuilder()
             .url(httpUrl)
             .build()
+
+        Log.d("WeatherApi", "Built request URL: ${request.url()}")
 
         chain.proceed(request)
     }

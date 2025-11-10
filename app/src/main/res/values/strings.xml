@@ -15,4 +15,6 @@
     <string name="prediction_activity_toolbar_title">Prediction</string>
     <string name="prediction_activity_title">Latest Prediction</string>
     <string name="finish_button_text">Finish</string>
+
+    <string name="weather_fetch_error">Error fetching weather data</string>
 </resources>

@@ -23,10 +23,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_prediction_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/activity_prediction_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -62,7 +64,8 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_medium"
                 android:textColor="@color/custom_theme_secondary_variant"
-                android:text="@string/prediction"
+                android:text=""
+                tools:text="@string/prediction"
                 app:layout_constraintTop_toBottomOf="@id/prediction_activity_i_predict_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -72,7 +75,7 @@
                 style="@style/Custom_Button_Theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:layout_marginTop="@dimen/margin_small"
                 android:text="@string/finish_button_text"
                 app:layout_constraintTop_toBottomOf="@id/prediction_activity_prediction_textView"
                 app:layout_constraintStart_toStartOf="parent"
