@@ -40,7 +40,6 @@ class PredictionActivity : AppCompatActivity() {
         finishedButton = findViewById(R.id.prediction_activity_finish_button)
 
         processIntent()
-        setRandomizedPrediction()
         // Return a prediction to the calling activity and finish
         finishedButton.setOnClickListener {
             val resultIntent = Intent().apply {
@@ -66,20 +65,6 @@ class PredictionActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRandomizedPrediction() {
-        // Randomize the prediction text
-        predictionText = WEATHER_OPTIONS.keys.random()
-
-        // Update the prediction text view with the new value
-        predictionTextView.text = predictionText
-
-        // Update the prediction image
-        val resource = WEATHER_OPTIONS[predictionText]
-        resource?.let {
-            predictionImageView.setImageResource(it)
-        }
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
@@ -100,13 +85,5 @@ class PredictionActivity : AppCompatActivity() {
                 }
             }
         }
-
-        val WEATHER_OPTIONS = mapOf(
-            "Cloudy with sunny skies" to R.drawable.sun,
-            "Dark and damp" to R.drawable.cloud,
-            "Raining cats and dogs" to R.drawable.pet,
-            "Hotter than the surface of the sun" to R.drawable.local_fire_department,
-            "Snowy and frigid" to R.drawable.snowboarding,
-            "Crisp and refreshing spring air" to R.drawable.air)
     }
 }
