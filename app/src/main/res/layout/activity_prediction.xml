@@ -67,25 +67,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <ImageView
-                android:id="@+id/prediction_activity_prediction_image_imageView"
-                android:layout_width="@dimen/image_width"
-                android:layout_height="@dimen/image_height"
-                android:layout_marginTop="@dimen/margin_small"
-                android:src="@drawable/cloud"
-                android:contentDescription="@string/image_content_description"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_prediction_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
             <Button
                 android:id="@+id/prediction_activity_finish_button"
                 style="@style/Custom_Button_Theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_xxlarge"
                 android:text="@string/finish_button_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_prediction_image_imageView"
+                app:layout_constraintTop_toBottomOf="@id/prediction_activity_prediction_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
