@@ -12,10 +12,6 @@ import com.example.semesterproject.persistence.AppDatabase
 import com.example.semesterproject.persistence.EntityModelConverter
 import com.example.semesterproject.persistence.ForecastEntity
 import com.example.semesterproject.persistence.ForecastModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     ) { result ->
         // If the weather was successfully predicted
         if (result.resultCode == RESULT_OK) {
-            Log.d(TAG, "Prediction Activity launched")
+            loadForecastsFromDatabase()
         }
     }
 
@@ -97,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     EntityModelConverter.convertEntityToModel(it)
                 }
 
-                displayForecasts(forecasts)
+                displayForecasts()
 
             } catch (e: Exception) {
                 displayHistoricalError(e)
@@ -109,10 +105,10 @@ class MainActivity : AppCompatActivity() {
         historicalPredictionsTextView.text = e.message ?: getString(R.string.prediction_loading_error)
     }
 
-    private fun displayForecasts(forecasts: List<ForecastModel>) {
+    private fun displayForecasts() {
         val historicalPredictionStringBuilder = StringBuilder()
         var count = 1
-        forecasts.forEach {
+        forecasts.reversed().forEach {
             historicalPredictionStringBuilder.append(
                 getString(
                     R.string.main_activity_historical_prediction_placeholder,
@@ -124,7 +120,6 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-
         historicalPredictionsTextView.text = historicalPredictionStringBuilder.toString()
     }
 

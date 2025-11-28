@@ -10,8 +10,8 @@ typealias ForecastEntity = com.example.semesterproject.persistence.entities.Fore
 object EntityModelConverter {
 
     fun convertModelToEntity(model: ForecastModel): ForecastEntity {
-        val location = model.location;
-        val current = model.current;
+        val location = model.location
+        val current = model.current
         return ForecastEntity(
             id = 0L,
             LocationEntity(
@@ -36,8 +36,8 @@ object EntityModelConverter {
     }
 
     fun convertEntityToModel(entity: ForecastEntity): ForecastModel {
-        val location = entity.location;
-        val current = entity.current;
+        val location = entity.location
+        val current = entity.current
         return ForecastModel(
             LocationModel(
                 location.name,

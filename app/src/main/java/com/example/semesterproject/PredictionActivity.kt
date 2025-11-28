@@ -68,9 +68,7 @@ class PredictionActivity : AppCompatActivity() {
         // Return a prediction to the calling activity and finish
         Log.d(TAG, "PredictionActivity setting finishedButton onClickListener")
         finishedButton.setOnClickListener {
-            val resultIntent = Intent().apply {
-
-            }
+            val resultIntent = Intent()
             setResult(RESULT_OK, resultIntent)
             finish()
         }
@@ -175,9 +173,9 @@ class PredictionActivity : AppCompatActivity() {
             val entity = EntityModelConverter.convertModelToEntity(model)
             AppDatabase.getDatabase(this@PredictionActivity).forecastDao().insert(entity)
         } catch (e: Exception) {
-            return false;
+            return false
         }
-        return true;
+        return true
     }
 
     companion object {
