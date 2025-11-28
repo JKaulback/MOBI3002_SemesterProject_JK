@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.Room
+import com.example.semesterproject.persistence.dao.ForecastDao
 import com.example.semesterproject.persistence.entities.Current
 import com.example.semesterproject.persistence.entities.ForecastResponse
 import com.example.semesterproject.persistence.entities.Location
@@ -15,6 +16,8 @@ import com.example.semesterproject.persistence.entities.Location
 )
 abstract class AppDatabase: RoomDatabase() {
 
+    abstract fun forecastDao(): ForecastDao
+
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -24,11 +27,10 @@ abstract class AppDatabase: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "forecase_db"
+                    "forecast_db"
                 ).build()
                 INSTANCE = instance
                 instance
-
             }
         }
     }

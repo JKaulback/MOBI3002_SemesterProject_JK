@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.drawable.DrawableCompat.setTint
 import com.example.semesterproject.api.WeatherRetrofitApi
+import com.example.semesterproject.models.ForecastResponse
+import com.example.semesterproject.persistence.AppDatabase
+import com.example.semesterproject.persistence.EntityModelConverter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -98,7 +101,7 @@ class PredictionActivity : AppCompatActivity() {
             try {
                 Log.d(TAG, "Fetching response...")
                 val forecastResponse = WeatherRetrofitApi.getForecast("Halifax", 1)
-                Log.d(TAG, "Response recieved... Attempting to update predictionTextView")
+                Log.d(TAG, "Response received... Attempting to update predictionTextView")
                 runOnUiThread {
                     areaTextView.text = getString(
                         R.string.area_placeholder,
@@ -139,7 +142,14 @@ class PredictionActivity : AppCompatActivity() {
                         forecastResponse.current.wind_dir
                     )
                 }
-
+                val saveSuccess = saveForecast(forecastResponse)
+                var text = "Forecast saved!"
+                if (!saveSuccess) {
+                    text = "Forecast failed to save"
+                }
+                runOnUiThread {
+                    Toast.makeText(this@PredictionActivity, text, Toast.LENGTH_SHORT).show()
+                }
             } catch(e: Exception) {
                 Log.d(TAG, e.message ?: getString(R.string.weather_fetch_error) )
 
@@ -158,6 +168,16 @@ class PredictionActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    suspend fun saveForecast(model: ForecastResponse): Boolean {
+        try {
+            val entity = EntityModelConverter.convertModelToEntity(model)
+            AppDatabase.getDatabase(this@PredictionActivity).forecastDao().insert(entity)
+        } catch (e: Exception) {
+            return false;
+        }
+        return true;
     }
 
     companion object {
