@@ -3,7 +3,6 @@ package com.example.semesterproject.models
 import com.google.gson.annotations.SerializedName
 
 data class Current(
-    @SerializedName("id") val id: Long = 0,
     @SerializedName("last_updated") val last_updated: String = "",
     @SerializedName("temp_c") val temp_c: Double = 0.0,
     @SerializedName("temp_f") val temp_f: Double = 0.0,

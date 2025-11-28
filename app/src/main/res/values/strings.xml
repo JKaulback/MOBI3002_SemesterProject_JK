@@ -11,6 +11,9 @@
     <string name="historical_predictions_text">Historical Predictions</string>
     <string name="main_activity_toolbar_title">Weather App</string>
 
+    <string name="main_activity_historical_prediction_placeholder">#%1$d.\nCity: %2$s\nProvince/State: %3$s\nCountry: %4$s\nTemp Celsius: %5$.2f\n\n</string>
+    <string name="test_historical_prediction_text">#1.\nCity: Halifax\n, Province/State: Nova Scotia\nCountry: Canada\nTemp Celsius: 11.8</string>
+    <string name="prediction_loading_error">Error loading historical predictions from database</string>
     <string name="prediction_activity_toolbar_title">Prediction</string>
     <string name="prediction_activity_title">Latest Prediction</string>
     <string name="finish_button_text">Finish</string>

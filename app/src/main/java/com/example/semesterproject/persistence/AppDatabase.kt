@@ -11,7 +11,7 @@ import com.example.semesterproject.persistence.entities.Location
 
 @Database(
     entities = [Current::class, Location::class, ForecastResponse::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {
@@ -28,7 +28,8 @@ abstract class AppDatabase: RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "forecast_db"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

@@ -13,9 +13,9 @@ object EntityModelConverter {
         val location = model.location;
         val current = model.current;
         return ForecastEntity(
-                model.id,
+            id = 0L,
             LocationEntity(
-                location.id,
+                id = 0L,
                 location.name,
                 location.region,
                 location.country,
@@ -24,7 +24,7 @@ object EntityModelConverter {
                 location.localtime
             ),
             CurrentEntity(
-                current.id,
+                id = 0L,
                 current.last_updated,
                 current.temp_c,
                 current.temp_f,
@@ -39,9 +39,7 @@ object EntityModelConverter {
         val location = entity.location;
         val current = entity.current;
         return ForecastModel(
-            entity.id,
             LocationModel(
-                location.id,
                 location.name,
                 location.region,
                 location.country,
@@ -50,7 +48,6 @@ object EntityModelConverter {
                 location.localtime
             ),
             CurrentModel(
-                current.id,
                 current.last_updated,
                 current.temp_c,
                 current.temp_f,
