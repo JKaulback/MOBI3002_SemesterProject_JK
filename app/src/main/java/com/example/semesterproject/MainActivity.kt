@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -54,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.e(TAG, "Crash in onCreate", e)
+            // Show a Toast so the user gets immediate feedback about the error
+            Toast.makeText(this, e.message ?: getString(R.string.prediction_loading_error), Toast.LENGTH_LONG).show()
             throw e
         }
     }
@@ -102,7 +105,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayHistoricalError(e: Exception) {
+
         historicalPredictionsTextView.text = e.message ?: getString(R.string.prediction_loading_error)
+
+        Toast.makeText(this, e.message ?: getString(R.string.prediction_loading_error), Toast.LENGTH_LONG).show()
+        Log.w(TAG, "Error loading historical predictions", e)
     }
 
     private fun displayForecasts() {
