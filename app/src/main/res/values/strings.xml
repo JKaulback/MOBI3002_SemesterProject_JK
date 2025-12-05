@@ -2,6 +2,8 @@
     <string name="app_name">SemesterProject</string>
     <string name="name_input_label">Enter Name</string>
     <string name="name_input_hint">Name</string>
+    <string name="city_input_label">Enter City</string>
+    <string name="city_input_hint">(Halifax, Fredericton, etc.)</string>
     <string name="main_activity_title">Weather Prediction</string>
     <string name="i_predict">I predict…</string>
     <string name="prediction">TextView for API Response</string>

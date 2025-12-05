@@ -22,7 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class PredictionActivity : AppCompatActivity() {
-    //
+    private var city: String = ""
     // UI widgets
     private lateinit var iPredictTextView: TextView
     private lateinit var areaTextView: TextView
@@ -80,14 +80,7 @@ class PredictionActivity : AppCompatActivity() {
     private fun processIntent() {
         intent?.apply {
             iPredictStringBuilder.clear()
-            val name = getStringExtra(EXTRA_NAME)
-            if (!name.isNullOrBlank()) {
-                iPredictStringBuilder.append(name)
-                iPredictStringBuilder.append(", ")
-            }
-            iPredictStringBuilder.append(getString(R.string.i_predict))
-
-            iPredictTextView.text = iPredictStringBuilder.toString()
+            city = getStringExtra(EXTRA_CITY) ?: ""
         }
     }
 
@@ -98,7 +91,7 @@ class PredictionActivity : AppCompatActivity() {
             Log.d(TAG, "Coroutine launched")
             try {
                 Log.d(TAG, "Fetching response...")
-                val forecastResponse = WeatherRetrofitApi.getForecast("Halifax", 1)
+                val forecastResponse = WeatherRetrofitApi.getForecast(city, 1)
                 Log.d(TAG, "Response received... Attempting to update predictionTextView")
                 runOnUiThread {
                     areaTextView.text = getString(
@@ -173,6 +166,7 @@ class PredictionActivity : AppCompatActivity() {
             val entity = EntityModelConverter.convertModelToEntity(model)
             AppDatabase.getDatabase(this@PredictionActivity).forecastDao().insert(entity)
         } catch (e: Exception) {
+            Log.d(TAG, e.toString())
             return false
         }
         return true
@@ -180,15 +174,15 @@ class PredictionActivity : AppCompatActivity() {
 
     companion object {
         // Encapsulated key to package name captured from intent used to create this activity
-        private const val EXTRA_NAME = "com.example.semesterproject.predictionactivity.name"
+        private const val EXTRA_CITY = "com.example.semesterproject.predictionactivity.city"
 
         private const val TAG = "com.example.semesterproject.predictionactivity"
 
         // A utility function called by any activity to start this one
-        fun newIntent(context: Context, userName: String?) : Intent {
+        fun newIntent(context: Context, city: String?) : Intent {
             return Intent(context, PredictionActivity::class.java).apply {
-                userName?.let { name ->
-                    putExtra(EXTRA_NAME, name)
+                city?.let { city ->
+                    putExtra(EXTRA_CITY, city)
                 }
             }
         }

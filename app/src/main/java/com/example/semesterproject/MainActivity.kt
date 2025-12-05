@@ -1,39 +1,27 @@
 package com.example.semesterproject
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.semesterproject.persistence.AppDatabase
-import com.example.semesterproject.persistence.EntityModelConverter
-import com.example.semesterproject.persistence.ForecastEntity
-import com.example.semesterproject.persistence.ForecastModel
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private var userName: String? = ""
-
-    private lateinit var forecasts: List<ForecastModel>
+    private var city: String? = ""
 
     // UI widgets
-    private lateinit var userNameInputView: EditText
+    private lateinit var cityInputView: EditText
     private lateinit var predictButton: Button
-    private lateinit var historicalPredictionsTextView: TextView
 
     private val predictWeatherLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        // If the weather was successfully predicted
-        if (result.resultCode == RESULT_OK) {
-            loadForecastsFromDatabase()
-        }
-    }
+    ) { clearCityInput() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +31,24 @@ class MainActivity : AppCompatActivity() {
             // Declare the custom Toolbar
             setSupportActionBar(findViewById(R.id.activity_main_toolbar))
 
-            userNameInputView = findViewById(R.id.activity_main_name_input_edit_text)
+            cityInputView = findViewById(R.id.activity_main_city_input_editText)
             predictButton = findViewById(R.id.activity_main_predict_button)
-            historicalPredictionsTextView = findViewById(R.id.activity_main_historical_prediction_data_textView)
+
+            cityInputView.addTextChangedListener(object: TextWatcher {
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    predictButton.visibility = if (!s.isNullOrBlank()) View.VISIBLE else View.INVISIBLE
+                }
+
+            })
 
             predictButton.setOnClickListener {
                 handlePredictButtonClick()
             }
-
-            loadForecastsFromDatabase()
 
         } catch (e: Exception) {
             Log.e(TAG, "Crash in onCreate", e)
@@ -68,66 +65,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Read the name entered in the name input view
-    private fun readName() {
-        Log.d(TAG, "Reading the Enter Name EditText view")
-        userName = userNameInputView.text.toString()
+    private fun readCity() {
+        Log.d(TAG, "Reading the Enter City EditText view")
+        city = cityInputView.text.toString()
+    }
+
+    private fun clearCityInput() {
+        cityInputView.setText("")
+        city = ""
     }
 
     private fun handlePredictButtonClick() {
-        readName()
+        readCity()
 
         predictWeatherLauncher.launch(
             PredictionActivity.newIntent(
                 this@MainActivity,
-                userName
+                city
             )
         )
-    }
-
-    private fun loadForecastsFromDatabase() {
-        lifecycleScope.launch {
-            try {
-                val forecastEntities: List<ForecastEntity> = AppDatabase
-                    .getDatabase(this@MainActivity)
-                    .forecastDao()
-                    .getForecasts()
-
-                forecasts = forecastEntities.map {
-                    EntityModelConverter.convertEntityToModel(it)
-                }
-
-                displayForecasts()
-
-            } catch (e: Exception) {
-                displayHistoricalError(e)
-            }
-        }
-    }
-
-    private fun displayHistoricalError(e: Exception) {
-
-        historicalPredictionsTextView.text = e.message ?: getString(R.string.prediction_loading_error)
-
-        Toast.makeText(this, e.message ?: getString(R.string.prediction_loading_error), Toast.LENGTH_LONG).show()
-        Log.w(TAG, "Error loading historical predictions", e)
-    }
-
-    private fun displayForecasts() {
-        val historicalPredictionStringBuilder = StringBuilder()
-        var count = 1
-        forecasts.reversed().forEach {
-            historicalPredictionStringBuilder.append(
-                getString(
-                    R.string.main_activity_historical_prediction_placeholder,
-                    count++,
-                    it.location.name,
-                    it.location.region,
-                    it.location.country,
-                    it.current.temp_c
-                )
-            )
-        }
-        historicalPredictionsTextView.text = historicalPredictionStringBuilder.toString()
     }
 
     companion object {
