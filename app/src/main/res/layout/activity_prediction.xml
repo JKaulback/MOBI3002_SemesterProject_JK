@@ -7,162 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".PredictionActivity">
 
-    <androidx.appcompat.widget.Toolbar
-    android:id="@+id/activity_prediction_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    android:elevation="@dimen/toolbar_elevation"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:titleTextColor="@color/white"
-    app:title="@string/prediction_activity_toolbar_title"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    <ProgressBar
+        android:id="@+id/activity_prediction_progressBar"
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="@dimen/progress_bar_height"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_prediction_toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/prediction_activity_title_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Custom_Title_Theme"
-                android:text="@string/prediction_activity_title"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/activity_prediction_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                app:title="@string/main_activity_toolbar_title"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleTextColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
-                android:id="@+id/prediction_activity_i_predict_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_medium"
-                android:text="@string/i_predict"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_title_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                android:id="@+id/prediction_activity_location_area_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/custom_theme_secondary_variant"
-                tools:text="@string/test_area_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_i_predict_textView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_prediction_recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_prediction_toolbar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_location_lat_lon_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/custom_theme_secondary_variant"
-                tools:text="@string/test_lat_lon_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_area_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_location_local_time_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/custom_theme_secondary_variant"
-                tools:text="@string/test_local_time_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_lat_lon_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_current_temp_time_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="@string/test_temp_time_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_location_local_time_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_current_temp_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="@string/test_temp_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_temp_time_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_current_wind_speed_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="@string/test_wind_speed_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_temp_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/prediction_activity_current_wind_dir_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:textAlignment="center"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="@string/test_wind_dir_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_wind_speed_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-
-            <ProgressBar
-                android:id="@+id/prediction_activity_progressBar"
-                android:layout_width="@dimen/progress_bar_width"
-                android:layout_height="@dimen/progress_bar_height"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:indeterminate="true"
-                android:layout_margin="@dimen/margin_small"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_i_predict_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <Button
-                android:id="@+id/prediction_activity_finish_button"
-                style="@style/Custom_Button_Theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:text="@string/finish_button_text"
-                app:layout_constraintTop_toBottomOf="@id/prediction_activity_current_wind_dir_textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

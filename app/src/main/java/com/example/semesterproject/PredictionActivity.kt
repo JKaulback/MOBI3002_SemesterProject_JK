@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.drawable.DrawableCompat.setTint
+import androidx.recyclerview.widget.RecyclerView
 import com.example.semesterproject.api.WeatherRetrofitApi
 import com.example.semesterproject.models.ForecastResponse
 import com.example.semesterproject.persistence.AppDatabase
@@ -24,18 +25,8 @@ import kotlinx.coroutines.launch
 class PredictionActivity : AppCompatActivity() {
     private var city: String = ""
     // UI widgets
-    private lateinit var iPredictTextView: TextView
-    private lateinit var areaTextView: TextView
-    private lateinit var latLonTextView: TextView
-    private lateinit var localTimeTextView: TextView
-    private lateinit var tempTimeTextView: TextView
-    private lateinit var tempTextView: TextView
-    private lateinit var windSpeedTextView: TextView
-    private lateinit var windDirectionTextView: TextView
-    private lateinit var finishedButton: Button
+    private lateinit var forecastRecycleView: RecyclerView
     private lateinit var progressBar: ProgressBar
-
-    private var iPredictStringBuilder = StringBuilder()
 
     private val coroutineContext = Job() + Dispatchers.IO
     private val coroutineScope = CoroutineScope(coroutineContext)
@@ -52,26 +43,12 @@ class PredictionActivity : AppCompatActivity() {
             setTint(drawable, android.graphics.Color.WHITE)
         }
 
-        Log.d(TAG, "PredictionActivity setting Views")
-        iPredictTextView = findViewById(R.id.prediction_activity_i_predict_textView)
-        areaTextView = findViewById(R.id.prediction_activity_location_area_textView)
-        latLonTextView = findViewById(R.id.prediction_activity_location_lat_lon_textView)
-        localTimeTextView = findViewById(R.id.prediction_activity_location_local_time_textView)
-        tempTimeTextView = findViewById(R.id.prediction_activity_current_temp_time_textView)
-        tempTextView = findViewById(R.id.prediction_activity_current_temp_textView)
-        windSpeedTextView = findViewById(R.id.prediction_activity_current_wind_speed_textView)
-        windDirectionTextView = findViewById(R.id.prediction_activity_current_wind_dir_textView)
-        finishedButton = findViewById(R.id.prediction_activity_finish_button)
-        progressBar = findViewById(R.id.prediction_activity_progressBar)
+        Log.d(TAG, "PredictionActivity setting RecyclerView")
+        forecastRecycleView = findViewById(R.id.activity_prediction_recycleView)
+        progressBar = findViewById(R.id.activity_prediction_progressBar)
 
         processIntent()
-        // Return a prediction to the calling activity and finish
-        Log.d(TAG, "PredictionActivity setting finishedButton onClickListener")
-        finishedButton.setOnClickListener {
-            val resultIntent = Intent()
-            setResult(RESULT_OK, resultIntent)
-            finish()
-        }
+
         Log.d(TAG, "PredictionActivity updating forecast")
         updateForecast()
     }
@@ -79,7 +56,6 @@ class PredictionActivity : AppCompatActivity() {
     // Check if any data passed from the previous activity
     private fun processIntent() {
         intent?.apply {
-            iPredictStringBuilder.clear()
             city = getStringExtra(EXTRA_CITY) ?: ""
         }
     }
@@ -94,44 +70,7 @@ class PredictionActivity : AppCompatActivity() {
                 val forecastResponse = WeatherRetrofitApi.getForecast(city, 1)
                 Log.d(TAG, "Response received... Attempting to update predictionTextView")
                 runOnUiThread {
-                    areaTextView.text = getString(
-                        R.string.area_placeholder,
-                        forecastResponse.location.name,
-                        forecastResponse.location.region,
-                        forecastResponse.location.country)
-
-                    latLonTextView.text = getString(
-                        R.string.lat_lon_placeholder,
-                        forecastResponse.location.lat,
-                        forecastResponse.location.lon
-                    )
-
-                    localTimeTextView.text = getString(
-                        R.string.local_time_placeholder,
-                        forecastResponse.location.localtime
-                    )
-
-                    tempTimeTextView.text = getString(
-                        R.string.temp_time_placeholder,
-                        forecastResponse.current.last_updated
-                    )
-
-                    tempTextView.text = getString(
-                        R.string.temp_placeholder,
-                        forecastResponse.current.temp_c,
-                        forecastResponse.current.temp_f
-                    )
-
-                    windSpeedTextView.text = getString(
-                        R.string.wind_speed_placeholder,
-                        forecastResponse.current.wind_kph,
-                        forecastResponse.current.wind_mph
-                    )
-
-                    windDirectionTextView.text = getString(
-                        R.string.wind_dir_placeholder,
-                        forecastResponse.current.wind_dir
-                    )
+                    // TODO
                 }
                 val saveSuccess = saveForecast(forecastResponse)
                 var text = "Forecast saved!"
