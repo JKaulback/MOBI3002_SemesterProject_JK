@@ -18,6 +18,8 @@
     <dimen name="layout_editor_abs_x">1dp</dimen>
     <dimen name="layout_editor_abs_y">1dp</dimen>
 
+    <dimen name="main_padding">15dp</dimen>
+
     <dimen name="image_width">200dp</dimen>
     <dimen name="image_height">200dp</dimen>
 
