@@ -22,7 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class PredictionActivity : AppCompatActivity() {
-
+    //
     // UI widgets
     private lateinit var iPredictTextView: TextView
     private lateinit var areaTextView: TextView
