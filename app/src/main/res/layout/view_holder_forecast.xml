@@ -54,16 +54,15 @@
         android:textSize="@dimen/text_size_large"
         tools:text="@string/test_temp_c_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/view_holder_city_textView"/>
 
     <TextView
         android:id="@+id/view_holder_celsius_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/celsius"
+        android:text="@string/celsius"
         app:layout_constraintStart_toEndOf="@id/view_holder_temp_c_textView"
-        app:layout_constraintBottom_toTopOf="@id/view_holder_temp_c_textView"/>
+        app:layout_constraintTop_toTopOf="@id/view_holder_temp_c_textView"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

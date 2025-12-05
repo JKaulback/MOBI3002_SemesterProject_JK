@@ -22,6 +22,7 @@
     <string name="celsius">°C</string>
 
     <string name="weather_fetch_error">Error fetching weather data</string>
+    <string name="weather_load_error">Error loading weather from database</string>
 
     <string name="area_placeholder">%1$s</string>
     <string name="predicted_at_placeholder">Predicted At: %1$s</string>

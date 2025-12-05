@@ -5,18 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.drawable.DrawableCompat.setTint
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.semesterproject.adapters.ForecastAdapter
 import com.example.semesterproject.api.WeatherRetrofitApi
 import com.example.semesterproject.models.ForecastResponse
 import com.example.semesterproject.persistence.AppDatabase
 import com.example.semesterproject.persistence.EntityModelConverter
+import com.example.semesterproject.persistence.ForecastEntity
+import com.example.semesterproject.persistence.ForecastModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -24,6 +26,7 @@ import kotlinx.coroutines.launch
 
 class PredictionActivity : AppCompatActivity() {
     private var city: String = ""
+
     // UI widgets
     private lateinit var forecastRecycleView: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -46,11 +49,14 @@ class PredictionActivity : AppCompatActivity() {
         Log.d(TAG, "PredictionActivity setting RecyclerView")
         forecastRecycleView = findViewById(R.id.activity_prediction_recycleView)
         progressBar = findViewById(R.id.activity_prediction_progressBar)
-
+        showProgressBar()
         processIntent()
 
         Log.d(TAG, "PredictionActivity updating forecast")
+
         updateForecast()
+
+        hideProgressBar()
     }
 
     // Check if any data passed from the previous activity
@@ -60,8 +66,15 @@ class PredictionActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateForecast() {
+    private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun updateForecast() {
         Log.d(TAG, "PredictionActivity launching coroutine")
         coroutineScope.launch {
             Log.d(TAG, "Coroutine launched")
@@ -80,6 +93,9 @@ class PredictionActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(this@PredictionActivity, text, Toast.LENGTH_SHORT).show()
                 }
+
+                loadForecastsFromDatabase()
+
             } catch(e: Exception) {
                 Log.d(TAG, e.message ?: getString(R.string.weather_fetch_error) )
 
@@ -89,10 +105,35 @@ class PredictionActivity : AppCompatActivity() {
                     toast.setText(getString(R.string.weather_fetch_error))
                     toast.show()
                 }
-            } finally {
-                runOnUiThread { progressBar.visibility = View.INVISIBLE }
             }
         }
+    }
+
+    private suspend fun loadForecastsFromDatabase() {
+        try {
+            val forecastEntities: List<ForecastEntity> = AppDatabase
+                .getDatabase(this@PredictionActivity)
+                .forecastDao()
+                .getForecasts()
+
+            val forecasts = forecastEntities
+                .map { EntityModelConverter.convertEntityToModel(it) }
+                .reversed()
+            runOnUiThread { displayForecasts(forecasts) }
+
+        } catch (e: Exception) {
+            Log.d(TAG, e.message ?: getString(R.string.weather_load_error) )
+
+            val toast = Toast(this@PredictionActivity)
+            toast.duration = Toast.LENGTH_LONG
+            toast.setText(getString(R.string.weather_load_error))
+            toast.show()
+        }
+    }
+
+    private fun displayForecasts(forecasts: List<ForecastModel>) {
+        forecastRecycleView.layoutManager = LinearLayoutManager(this)
+        forecastRecycleView.adapter = ForecastAdapter(forecasts)
     }
 
     override fun onSupportNavigateUp(): Boolean {
